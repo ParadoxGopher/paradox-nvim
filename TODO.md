@@ -1,6 +1,5 @@
 # Plugins / Setup missing
 
-- nvim-tree
 - gitsigns
 - trouble
 - telescope
