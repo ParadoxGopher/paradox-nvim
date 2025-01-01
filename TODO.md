@@ -9,11 +9,13 @@
 - ts-comments
 - mini.ai
 - todo-comments
+- snacks
 
 ## might be interesting
 
 - flash
 - buffertags
+- mason
 
 ## might need more config
 
