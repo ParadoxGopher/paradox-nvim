@@ -3,7 +3,6 @@
 - gitsigns
 - trouble
 - telescope
-- vim-which-key
 - mini.pairs
 - ts-comments
 - mini.ai
