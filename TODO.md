@@ -2,7 +2,6 @@
 
 - gitsigns
 - trouble
-- telescope
 - mini.pairs
 - ts-comments
 - mini.ai
