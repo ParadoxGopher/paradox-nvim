@@ -5,7 +5,8 @@ return {
     "neovim/nvim-lspconfig",
     "nvim-treesitter/nvim-treesitter",
     "nvim-neotest/neotest",
-    "nvim-neotest/neotest-go",
+    "fredrikaverpil/neotest-golang",
+    "nvim-neotest/nvim-nio",
     "nvim-lua/plenary.nvim",
     "antoinemadec/FixCursorHold.nvim",
   },
@@ -18,15 +19,19 @@ return {
     })
     require("neotest").setup({
       adapters = {
-        require("neotest-go")({
-          experimental = {
-            test_table = true,
+        require("neotest-golang")({
+          go_test_args = {
+            "-v",
+            "-count=1",
           },
-          args = { "-count=1" },
-          recursive_run = true,
         })
       },
     })
+    vim.keymap.set("n", "<leader>gtt", require("neotest").run.run, { desc = "run closest test" })
+    vim.keymap.set("n", "<leader>gta", function()
+      require("neotest").run.run("backend")
+    end, { desc = "run all tests" })
+    vim.keymap.set("n", "<leader>gts", require("neotest").summary.toggle, { desc = "toggle test summary" })
   end,
   event = {"CmdlineEnter"},
   ft = {"go", "gomod"},
