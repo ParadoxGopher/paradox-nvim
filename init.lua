@@ -2,7 +2,7 @@ vim.g.mapleader = "," -- set mapleader to ,
 
 vim.opt.compatible = false -- don't try to be vi compatible
 vim.opt.termguicolors = true -- use 24-bit colors
-vim.opt.signcolumn = 'yes' -- reserve space in gutter
+vim.opt.signcolumn = 'yes:3' -- reserve space in gutter
 vim.opt.smarttab = true -- let tab and backspace work like in IDEs
 vim.opt.modelines = 0 -- disable modelines (security?!)
 vim.opt.number = true -- enable line numbers
