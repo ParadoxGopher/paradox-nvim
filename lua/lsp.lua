@@ -1,3 +1,5 @@
+-- lsp config
+
 -- add cmp_nvim_lsp to lspconfig
 local lspconfig_defaults = require("lspconfig").util.default_config
 lspconfig_defaults.capabilities = vim.tbl_deep_extend(
@@ -25,9 +27,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-require("lspconfig").gopls.setup({})
-require("lspconfig").lua_ls.setup({})
+require("mason").setup({})
+require("mason-lspconfig").setup({
+  ensure_installed = {
+    "lua_ls", "gopls", "ts_ls", "volar",
+  },
+  handlers = {
+    function(server_name)
+      require('lspconfig')[server_name].setup({})
+    end
+  },
+})
 
+-- autocomplete config
 local cmp = require("cmp")
 
 cmp.setup({
