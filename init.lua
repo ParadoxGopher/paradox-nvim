@@ -1,4 +1,5 @@
 vim.g.mapleader = "," -- set mapleader to ,
+vim.g.maplocalleader = ","
 
 vim.opt.compatible = false -- don't try to be vi compatible
 vim.opt.termguicolors = true -- use 24-bit colors
@@ -35,14 +36,3 @@ vim.opt.showmatch = true
 -- load plugin config
 require('config.lazy')
 
--- load lsp config
-require('lsp')
-
-local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.go",
-  callback = function ()
-    require('go.format').goimports()
-  end,
-  group = format_sync_grp
-})

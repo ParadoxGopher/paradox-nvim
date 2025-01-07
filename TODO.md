@@ -1,18 +1,14 @@
 # Plugins / Setup missing
 
-- gitsigns
-- trouble
-- mini.pairs
 - ts-comments
 - mini.ai
 - todo-comments
-- snacks
+- oil
 
 ## might be interesting
 
 - flash
 - buffertags
-- mason
 
 ## might need more config
 
