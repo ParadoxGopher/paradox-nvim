@@ -1,5 +1,6 @@
 return {
   "ray-x/go.nvim",
+  after = "nvim-lspconfig",
   dependencies = {  -- optional packages
     "ray-x/guihua.lua",
     "neovim/nvim-lspconfig",
@@ -27,6 +28,7 @@ return {
         })
       },
     })
+    vim.keymap.set("n", "<leader> ", "<cmd>GoCodeAction<cr>", { desc = "code action ", remap = false })
     vim.keymap.set("n", "<leader>gtt", require("neotest").run.run, { desc = "run closest test" })
     vim.keymap.set("n", "<leader>gta", function()
       require("neotest").run.run(".")

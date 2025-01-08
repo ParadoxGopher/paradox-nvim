@@ -13,4 +13,9 @@ return {
     statuscolumn = { enabled = true },
     words = { enabled = true },
   },
+  config = function(_, opts)
+    local notify = vim.notify
+    require("snacks").setup(opts)
+    vim.notify = notify
+  end,
 }

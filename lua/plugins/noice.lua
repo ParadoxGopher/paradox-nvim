@@ -13,6 +13,10 @@ return {
         ["cmp.entry.get_documentation"] = true,
       },
     },
+    notify = {
+      enabled = true,
+      view = "notify",
+    },
     routes = {
       {
         filter = {
@@ -23,7 +27,7 @@ return {
             { find = "; before #%d+" },
           },
         },
-        view = "mini",
+        view = "notify",
       },
     },
     presets = {
@@ -39,6 +43,10 @@ return {
     if vim.o.filetype == "lazy" then
       vim.cmd([[messages clear]])
     end
+    require("notify").setup({
+      timeout = 10000,
+      render = "wrapped-compact",
+    })
     require("noice").setup(opts)
   end,
 }

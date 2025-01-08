@@ -1,5 +1,6 @@
 vim.g.mapleader = "," -- set mapleader to ,
 vim.g.maplocalleader = ","
+vim.g.editorconfig = true
 
 vim.opt.compatible = false -- don't try to be vi compatible
 vim.opt.termguicolors = true -- use 24-bit colors
