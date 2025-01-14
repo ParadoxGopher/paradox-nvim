@@ -12,7 +12,7 @@ return {
     },
     {
       "<leader>fr",
-      "<cmd>Telescope grep_string<cr>",
+      "<cmd>Telescope live_grep<cr>",
       desc = "find in files",
     },
   },

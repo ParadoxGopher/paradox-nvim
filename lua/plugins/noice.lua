@@ -27,7 +27,7 @@ return {
             { find = "; before #%d+" },
           },
         },
-        view = "notify",
+        view = "mini",
       },
     },
     presets = {
