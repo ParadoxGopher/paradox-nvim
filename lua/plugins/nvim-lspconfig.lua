@@ -35,16 +35,54 @@ return {
 
     require("mason").setup()
     require("mason-lspconfig").setup({
+      automatic_installation = true,
       ensure_installed = {
         "lua_ls", "gopls", "ts_ls", "volar",
       },
-      handlers = {
-        function(server_name)
-          lspconfig[server_name].setup({
-            capabilities = capabilities,
-            on_attach = default_on_attach,
-          })
-        end
+    })
+    lspconfig.lua_ls.setup({
+      capabilities = capabilities,
+      on_attach = default_on_attach,
+    })
+
+    lspconfig.eslint.setup({
+      capabilities = capabilities,
+      on_attach = function (_, bufnr)
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          buffer = bufnr,
+          command = "EslintFixAll",
+        })
+        default_on_attach(_, bufnr)
+      end,
+    })
+
+    -- lspconfig.ts_ls.setup({
+    --   capabilities = capabilities,
+    --   on_attach = default_on_attach,
+    --   init_options = {
+    --     plugins = {
+    --       {
+    --         name = "@vue/typescript-plugin",
+    --         location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+    --         languages = {"javascript", "typescript", "vue"},
+    --       },
+    --     },
+    --   },
+    --   filetypes = {
+    --     "javascript",
+    --     "typescript",
+    --     "vue",
+    --   },
+    -- })
+
+    lspconfig.volar.setup({
+      capabilities = capabilities,
+      on_attach = default_on_attach,
+      filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+      init_options = {
+        vue = {
+          hybridMode = false,
+        },
       },
     })
   end

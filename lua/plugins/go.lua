@@ -12,7 +12,11 @@ return {
     "antoinemadec/FixCursorHold.nvim",
   },
   config = function()
-    require("go").setup()
+    require("go").setup({
+      lsp_cfg = true,
+      lsp_keymaps = true,
+      trouble = true,
+    })
     require("nvim-treesitter.configs").setup({
       highlight = {
         enable = true
