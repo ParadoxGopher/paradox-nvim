@@ -15,6 +15,11 @@ return {
     require("go").setup({
       lsp_cfg = true,
       lsp_keymaps = true,
+      lsp_on_attach = function(client, bufnr)
+        require("go.lsp").gopls_on_attach(client, bufnr)
+        vim.api.nvim_set_current_dir(client.config.root_dir)
+        vim.env.PATH = vim.env.PATH .. ":" .. client.config.root_dir
+      end,
       trouble = true,
     })
     require("nvim-treesitter.configs").setup({

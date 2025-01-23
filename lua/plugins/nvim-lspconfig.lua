@@ -22,15 +22,18 @@ return {
       severity_sort = true,
     })
 
-    local function default_on_attach(_, bufnr)
+    local function default_on_attach(client, bufnr)
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "goto definition" })
       vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "list references" })
       vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "hover info" })
-      -- vim.keymap.set("n", "<leader> ", vim.lsp.buf.code_action, { buffer = bufnr, desc = "code action" })
+      vim.keymap.set("n", "<leader> ", vim.lsp.buf.code_action, { buffer = bufnr, desc = "code action" })
 
       if vim.lsp.inlay_hint then
         vim.lsp.inlay_hint.enable(true, { bufnr })
       end
+
+      vim.api.nvim_set_current_dir(client.config.root_dir)
+      vim.env.PATH = vim.env.PATH .. ":" .. client.config.root_dir
     end
 
     require("mason").setup()
