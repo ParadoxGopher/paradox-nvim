@@ -113,5 +113,11 @@ return {
         }
       end
     })
+
+    lspconfig.terraformls.setup({
+      name = "terraform",
+      cmd = { "terraform-ls", "serve" },
+      filetypes = { "terraform", "terraform-vars" },
+    })
   end
 }
