@@ -7,7 +7,7 @@ return {
     "williamboman/mason.nvim",
   },
   config = function ()
-    local lspconfig = require("lspconfig")
+    -- local lspconfig = require("lspconfig")
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
     vim.diagnostic.config({
@@ -43,21 +43,21 @@ return {
         "lua_ls", "gopls", "ts_ls", "volar",
       },
     })
-    lspconfig.lua_ls.setup({
+    vim.lsp.config("lua_ls", {
       capabilities = capabilities,
       on_attach = default_on_attach,
     })
 
-    lspconfig.eslint.setup({
-      capabilities = capabilities,
-      on_attach = function (_, bufnr)
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          buffer = bufnr,
-          command = "EslintFixAll",
-        })
-        default_on_attach(_, bufnr)
-      end,
-    })
+    -- lspconfig.eslint.setup({
+    --   capabilities = capabilities,
+    --   on_attach = function (_, bufnr)
+    --     vim.api.nvim_create_autocmd("BufWritePre", {
+    --       buffer = bufnr,
+    --       command = "EslintFixAll",
+    --     })
+    --     default_on_attach(_, bufnr)
+    --   end,
+    -- })
 
     -- lspconfig.ts_ls.setup({
     --   capabilities = capabilities,
@@ -78,46 +78,46 @@ return {
     --   },
     -- })
 
-    lspconfig.volar.setup({
-      capabilities = capabilities,
-      on_attach = default_on_attach,
-      filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-      init_options = {
-        vue = {
-          hybridMode = false,
-        },
-      },
-    })
+    -- lspconfig.volar.setup({
+    --   capabilities = capabilities,
+    --   on_attach = default_on_attach,
+    --   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+    --   init_options = {
+    --     vue = {
+    --       hybridMode = false,
+    --     },
+    --   },
+    -- })
 
-    lspconfig.gdscript.setup({
-      name = "godot",
-      cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
-      on_attach = function (_, bufnr)
-        default_on_attach(_, bufnr)
+    -- lspconfig.gdscript.setup({
+    --   name = "godot",
+    --   cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
+    --   on_attach = function (_, bufnr)
+    --     default_on_attach(_, bufnr)
+    --
+    --     local dap = require("dap")
+    --     dap.adapters.godot = {
+    --       type = "server",
+    --       host = "127.0.0.1",
+    --       port = 6006,
+    --     }
+    --
+    --     dap.configurations.gdscript = {
+    --       {
+    --         type = "godot",
+    --         request = "launch",
+    --         name = "Launch scene",
+    --         project = "${workspaceFolder}",
+    --         launch_scene = true,
+    --       },
+    --     }
+    --   end
+    -- })
 
-        local dap = require("dap")
-        dap.adapters.godot = {
-          type = "server",
-          host = "127.0.0.1",
-          port = 6006,
-        }
-
-        dap.configurations.gdscript = {
-          {
-            type = "godot",
-            request = "launch",
-            name = "Launch scene",
-            project = "${workspaceFolder}",
-            launch_scene = true,
-          },
-        }
-      end
-    })
-
-    lspconfig.terraformls.setup({
-      name = "terraform",
-      cmd = { "terraform-ls", "serve" },
-      filetypes = { "terraform", "terraform-vars" },
-    })
+    -- lspconfig.terraformls.setup({
+    --   name = "terraform",
+    --   cmd = { "terraform-ls", "serve" },
+    --   filetypes = { "terraform", "terraform-vars" },
+    -- })
   end
 }
