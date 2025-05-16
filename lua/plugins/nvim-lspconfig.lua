@@ -7,7 +7,6 @@ return {
     "williamboman/mason.nvim",
   },
   config = function ()
-    -- local lspconfig = require("lspconfig")
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
     vim.diagnostic.config({
@@ -40,7 +39,7 @@ return {
     require("mason-lspconfig").setup({
       automatic_installation = true,
       ensure_installed = {
-        "lua_ls", "gopls", "ts_ls", "volar",
+        "lua_ls", "gopls",
       },
     })
     vim.lsp.config("lua_ls", {
