@@ -42,11 +42,13 @@ return {
         "lua_ls", "gopls",
       },
     })
+
     vim.lsp.config("lua_ls", {
       capabilities = capabilities,
       on_attach = default_on_attach,
     })
 
+    vim.lsp.enable('ts_ls')
     -- lspconfig.eslint.setup({
     --   capabilities = capabilities,
     --   on_attach = function (_, bufnr)
