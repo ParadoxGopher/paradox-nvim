@@ -1,7 +1,7 @@
 return {
   "ray-x/go.nvim",
   after = "nvim-lspconfig",
-  dependencies = {  -- optional packages
+  dependencies = { -- optional packages
     "ray-x/guihua.lua",
     "neovim/nvim-lspconfig",
     "nvim-treesitter/nvim-treesitter",
@@ -13,14 +13,25 @@ return {
   },
   config = function()
     require("go").setup({
-      lsp_cfg = true,
-      lsp_keymaps = true,
+      lsp_cfg = {
+        settings = {
+          gopls = {
+            usePlaceholders = false,
+          },
+        },
+      },
+      lsp_keymaps = false,
       lsp_on_attach = function(client, bufnr)
         require("go.lsp").gopls_on_attach(client, bufnr)
         vim.api.nvim_set_current_dir(client.config.root_dir)
         vim.env.PATH = vim.env.PATH .. ":" .. client.config.root_dir
+        vim.keymap.set("n", "grd", vim.lsp.buf.definition, { buffer = bufnr, desc = "goto definition" })
       end,
       trouble = true,
+      -- diagnostic = true,
+      lsp_inlay_hints = {
+        enable = true,
+      },
     })
     require("nvim-treesitter.configs").setup({
       highlight = {
@@ -47,13 +58,13 @@ return {
     local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
     vim.api.nvim_create_autocmd("BufWritePre", {
       pattern = "*.go",
-      callback = function ()
+      callback = function()
         require('go.format').goimports()
       end,
       group = format_sync_grp
     })
   end,
   -- event = {"CmdlineEnter"},
-  ft = {"go", "gomod"},
+  ft = { "go", "gomod" },
   build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
 }

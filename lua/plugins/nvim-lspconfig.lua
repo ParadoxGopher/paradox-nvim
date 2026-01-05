@@ -6,15 +6,16 @@ return {
     "williamboman/mason-lspconfig.nvim",
     "williamboman/mason.nvim",
   },
-  config = function ()
+  config = function()
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
     vim.diagnostic.config({
       float = {
         source = true,
       },
-      virtual_text = {
-        virt_text_pos = "right_align",
+      virtual_text = false,
+      virtual_lines = {
+        current_line = false,
       },
       signs = true,
       underline = true,
@@ -22,14 +23,14 @@ return {
     })
 
     local function default_on_attach(client, bufnr)
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "goto definition" })
-      vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "list references" })
+      vim.keymap.set("n", "grd", vim.lsp.buf.definition, { buffer = bufnr, desc = "goto definition" })
+      vim.keymap.set("n", "grr", vim.lsp.buf.references, { buffer = bufnr, desc = "list references" })
       vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "hover info" })
       vim.keymap.set("n", "<leader> ", vim.lsp.buf.code_action, { buffer = bufnr, desc = "code action" })
 
-      if vim.lsp.inlay_hint then
-        vim.lsp.inlay_hint.enable(true, { bufnr })
-      end
+      -- if vim.lsp.inlay_hint then
+      --   vim.lsp.inlay_hint.enable(true, { bufnr })
+      -- end
 
       vim.api.nvim_set_current_dir(client.config.root_dir)
       vim.env.PATH = vim.env.PATH .. ":" .. client.config.root_dir
@@ -48,7 +49,9 @@ return {
       on_attach = default_on_attach,
     })
 
-    vim.lsp.enable('ts_ls')
+    -- vim.lsp.enable('ts_ls')
+
+    -- vim.lsp.enable("emmet_ls")
     -- lspconfig.eslint.setup({
     --   capabilities = capabilities,
     --   on_attach = function (_, bufnr)
