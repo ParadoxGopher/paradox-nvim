@@ -31,15 +31,6 @@ return {
     })
     vim.keymap.set("n", "<leader> ", "<cmd>GoCodeAction<cr>", { desc = "code action ", remap = false })
     vim.keymap.set("n", "grr", "<cmd>Telescope lsp_references<cr>", { desc = "find reference" })
-
-    local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      pattern = "*.go",
-      callback = function()
-        require('go.format').goimports()
-      end,
-      group = format_sync_grp
-    })
   end,
   -- event = {"CmdlineEnter"},
   ft = { "go", "gomod" },
