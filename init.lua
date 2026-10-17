@@ -30,5 +30,3 @@ require("lazy").setup({
                 { import = "plugins" },
         },
 })
-
-vim.opt.showmode = false

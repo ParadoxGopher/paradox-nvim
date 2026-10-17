@@ -1,5 +1,4 @@
 -- nvim options
-vim.opt.showmode = false
 vim.opt.compatible = false   -- don't try to be vi compatible
 vim.opt.termguicolors = true -- use 24-bit colors
 -- vim.opt.signcolumn = 'yes:3'           -- reserve space in gutter
@@ -24,7 +23,7 @@ vim.opt.scrolloff = 3      -- keep curser away from edge
 vim.opt.hidden = true      -- enable hidden buffers
 vim.opt.ttyfast = true     -- enable smooth tty
 vim.opt.laststatus = 2     -- enable status also for last window
-vim.opt.showmode = true    -- show mode in last line
+vim.opt.showmode = false   -- lualine shows the mode
 vim.opt.showcmd = true     -- show cmd in last line
 
 -- vim.opt.hlsearch = true
