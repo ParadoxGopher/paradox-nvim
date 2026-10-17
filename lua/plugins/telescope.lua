@@ -15,5 +15,10 @@ return {
       "<cmd>Telescope live_grep<cr>",
       desc = "find in files",
     },
+    {
+      "<leader>fn",
+      "<cmd>Telescope notify<cr>",
+      desc = "search notifications",
+    },
   },
 }

@@ -1,15 +1,9 @@
 return {
   "ray-x/go.nvim",
-  after = "nvim-lspconfig",
   dependencies = { -- optional packages
-    "ray-x/guihua.lua",
     "neovim/nvim-lspconfig",
-    "nvim-treesitter/nvim-treesitter",
-    "nvim-neotest/neotest",
-    "fredrikaverpil/neotest-golang",
-    "nvim-neotest/nvim-nio",
-    "nvim-lua/plenary.nvim",
-    "antoinemadec/FixCursorHold.nvim",
+    "nvim-telescope/telescope.nvim",
+    -- "nvim-treesitter/nvim-treesitter",
   },
   config = function()
     require("go").setup({
@@ -17,6 +11,8 @@ return {
         settings = {
           gopls = {
             usePlaceholders = false,
+            diagnosticsTrigger = "Edit",
+            diagnosticsDelay = "250ms",
           },
         },
       },
@@ -28,32 +24,13 @@ return {
         vim.keymap.set("n", "grd", vim.lsp.buf.definition, { buffer = bufnr, desc = "goto definition" })
       end,
       trouble = true,
-      -- diagnostic = true,
+      diagnostic = false,
       lsp_inlay_hints = {
-        enable = true,
-      },
-    })
-    require("nvim-treesitter.configs").setup({
-      highlight = {
-        enable = true
-      },
-    })
-    require("neotest").setup({
-      adapters = {
-        require("neotest-golang")({
-          go_test_args = {
-            "-v",
-            "-count=1",
-          },
-        })
+        enable = false,
       },
     })
     vim.keymap.set("n", "<leader> ", "<cmd>GoCodeAction<cr>", { desc = "code action ", remap = false })
-    vim.keymap.set("n", "<leader>gtt", require("neotest").run.run, { desc = "run closest test" })
-    vim.keymap.set("n", "<leader>gta", function()
-      require("neotest").run.run(".")
-    end, { desc = "run all tests" })
-    vim.keymap.set("n", "<leader>gts", require("neotest").summary.toggle, { desc = "toggle test summary" })
+    vim.keymap.set("n", "grr", "<cmd>Telescope lsp_references<cr>", { desc = "find reference" })
 
     local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
     vim.api.nvim_create_autocmd("BufWritePre", {
