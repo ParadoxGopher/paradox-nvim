@@ -34,7 +34,9 @@ return {
       -- end
 
       vim.api.nvim_set_current_dir(client.config.root_dir)
-      vim.env.PATH = vim.env.PATH .. ":" .. client.config.root_dir
+      if not vim.list_contains(vim.split(vim.env.PATH or "", ":", { plain = true }), client.config.root_dir) then
+        vim.env.PATH = vim.env.PATH .. ":" .. client.config.root_dir
+      end
     end
 
     require("mason").setup()
